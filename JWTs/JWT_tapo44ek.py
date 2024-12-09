@@ -3,9 +3,15 @@ from datetime import datetime, timezone, timedelta
 from fastapi import HTTPException, Request, Depends 
 import logging
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+ALGORITHM = os.environ["ALGORITHM"]
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 logger = logging.getLogger(__name__)
-
 
 def get_token(request: Request):
     token = request.cookies.get("access_token")
@@ -14,7 +20,7 @@ def get_token(request: Request):
     return token
 
 
-async def create_jwt_token(user_data, secret, algorithm):
+async def create_jwt_token(user_data):
     """
     Create jwt 
     """
@@ -25,19 +31,19 @@ async def create_jwt_token(user_data, secret, algorithm):
         payload = user_data
         payload["exp"] = datetime.now(timezone.utc) + timedelta(hours=1)
 
-        return jwt.encode(payload, secret, algorithm)
+        return jwt.encode(payload, SECRET_KEY, ALGORITHM)
     
     else:
         raise HTTPException(status_code=401, detail="No user data")
 
 
-def decode_jwt(secret : str, algorithm : str, token: str = Depends(get_token)):
+def decode_jwt(token: str = Depends(get_token)):
     if not token:
         raise HTTPException(status_code=401, detail="Token is missing")
 
     try:
         payload = jwt.decode(
-            token, secret, algorithms=[algorithm]
+            token, SECRET_KEY, algorithms=[ALGORITHM]
         )
         
         return payload
