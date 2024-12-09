@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "JWT_tapo44ek"  # Название вашей библиотеки
-version = "1.0.2"
+version = "1.0.3"
 description = "A simple library for JWT management with FastAPI"
 readme = "README.md"
 requires-python = ">=3.8"
