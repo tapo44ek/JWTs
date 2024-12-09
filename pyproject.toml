@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "JWTs"  # Название вашей библиотеки
+name = "JWT_helper"  # Название вашей библиотеки
 version = "1.0.0"
 description = "A simple library for JWT management with FastAPI"
 readme = "README.md"
