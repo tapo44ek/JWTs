@@ -14,7 +14,7 @@ def get_token(request: Request):
     return token
 
 
-async def create_jwt_token(user_data, secret, algorythm):
+async def create_jwt_token(user_data, secret, algorithm):
     """
     Create jwt 
     """
@@ -25,19 +25,19 @@ async def create_jwt_token(user_data, secret, algorythm):
         payload = user_data
         payload["exp"] = datetime.now(timezone.utc) + timedelta(hours=1)
 
-        return jwt.encode(payload, secret, algorythm)
+        return jwt.encode(payload, secret, algorithm)
     
     else:
         raise HTTPException(status_code=401, detail="No user data")
 
 
-def decode_jwt(token: str = Depends(get_token), secret, algorythm):
+def decode_jwt(secret : str, algorithm : str, token: str = Depends(get_token)):
     if not token:
         raise HTTPException(status_code=401, detail="Token is missing")
 
     try:
         payload = jwt.decode(
-            token, secret, algorithms=[algorythm]
+            token, secret, algorithms=[algorithm]
         )
         
         return payload
