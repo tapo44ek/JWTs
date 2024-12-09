@@ -8,5 +8,5 @@ A simple library for JWT management in FastAPI projects.
 
 ## Installation
 ```bash
-pip install jwt-helper
+pip install JWTs
 ```
