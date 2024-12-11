@@ -1,2 +1,2 @@
 JWTs
-test'
+dist

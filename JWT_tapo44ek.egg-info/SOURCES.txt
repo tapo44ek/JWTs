@@ -8,4 +8,3 @@ JWT_tapo44ek.egg-info/requires.txt
 JWT_tapo44ek.egg-info/top_level.txt
 JWTs/JWT_tapo44ek.py
 JWTs/__init__.py
-test'/test.py
